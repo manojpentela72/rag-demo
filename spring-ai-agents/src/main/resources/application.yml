@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: rag-demo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ragdb
+    username: postgres
+    password: postgres
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+
+      chat:
+        model: llama3.2:3b
+        temperature: 0.2
+      embedding:
+        model: nomic-embed-text
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        table-name: vector_store
+
+server:
+  port: 8595
+
+logging:
+  level:
+    org.springframework.ai: DEBUG
